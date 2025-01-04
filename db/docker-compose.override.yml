@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  db:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - DOTNET_LogLevel=Information
+      - Logging__Console__FormatterName=simple
+    ports:
+      - "8080"
+    networks:
+      - mysql-network
+
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-network
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+networks:
+  mysql-network:
+    driver: bridge

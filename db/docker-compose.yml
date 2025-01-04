@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  db:
+    image: ${DOCKER_REGISTRY-}db
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+ 
+  mysql:
+    image: mysql:8.0.27
+
+    
